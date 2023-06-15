@@ -4,71 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.mim.css" type="test/css">
     <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+
+    <script>
+      $(document).ready(function(){
+        $("#cep").on("focusout",function(){
+          var url = 'https://viacep.com.br/ws/'+$("#cep").val()+'/json/'
+          console.log(url);
+          $.ajax({
+            url: url,
+            dataType: "json",
+            method: 'get',
+            success: function(response){
+              console.log(response);
+              $("#logradouro").val(response.logradouro);
+              $("#bairro").val(response.bairro);
+              $("#cidade").val(response.localidade);
+              $("#uf").val(response.uf);
+            },  
+            error : function(error){
+              console.log(error);
+              $('err').html("CEP não encontrado.")
+            },            
+          });
+        });
+      });
+    </script>
 </head>
-<body>
-    <h1>Registro de Cadastro</h1>
-    <form action="">
-        <!--Dados Pessoais-->
-        <h3>Dados Pessoais</h3>
-        <label for="nome">Nome:</label>
-        <input type="text" placeholder="primeiro nome">
-        <br><br>
-        <label for="nome">Sobrenome:</label>
-        <input type="text" placeholder="ultimo nome">
-        <br><br>
-        <label for="cpf">CPF:</label>
-        <input type="text" placeholder="xxx.xxx.xxx-xx">
-        <br><br>
-        <label for="data">Data Nascimento:</label>
-        <input type="date">
-        <br><br>
-        <label for="sexo">Sexo:</label><br>
-        <input type="radio"value="homem">
-        <label for="homem">Homem</label>
-        <input type="radio" value="mulher">
-        <label for="homem">Mulher</label>
-        <input type="radio" value="outros">
-        <label for="homem">outros</label>
-    
-        <!--Contatos-->
-        <h3>Contato</h3>
-        <label for="telefone">Telefone 1</label>
-        <input type="tel" placeholder="(xx)xxxxx-xxxx">
-        <br><br>
-        <label for="telefone">Telefone 2</label>
-        <input type="tel" placeholder="(xx)xxxxx-xxxx">
-        <br><br>
-        <label for="email">Email:</label>
-        <input type="email" placeholder="nome@exemplo.com">
-        <!--Endereço-->
-        <h3>Endereço</h3>
-        <label for="cep">CEP:</label>
-        <input type="text">
-        <br><br>
-        <label for="endereco">Endereço</label>
-        <input type="text">
-        <br><br>
-        <label for="numero">Numero:</label>
-        <input type="text">
-        <br><br>
-        <label for="bairro">Bairro:</label>
-        <input type="text">
-        <br><br>
-        <label for="cidade">Cidade:</label>
-        <input type="text">
-        <br><br>
-        <label for="estado">Estado:</label>
-        <input type="text">
-        <!--Validação com documento-->
-        <h3>Validação</h3>
-        <label for="documento">Documento com foto:</label><br>
-        <input type="file"> 
-        <br><br>
-        <!--Botão de submit-->
-        <input type="submit" value="Cadastrar">
-    </form>
+<body style="background-color: DarkSeaGreen;">
+  <main>
+      <div class="container text-left">
+        
+        <h1 class="text-center display-2">Registro de Cadastro</h1>
+        <form method="post" action="segunda_pagina.php">
+          
+          <!--Dados Pessoais-->
+          <br><br><br>
+          <h3 class="display-6">Dados Pessoais</h3>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="nome" class="lead">Nome:</label>
+              <input type="text" class="form-control" name="primeiro_nome" placeholder="primeiro nome" required>
+              
+              <br>             
+            </div>
+          <div class="col-md-4">
+            <label for="nome" class="lead">Sobrenome:</label>
+            <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome" required>
+            <br>
+          </div>
+          <div class="col-md-2">
+            <label for="cpf" class="lead">CPF:</label>
+            <input type="text" class="form-control" name="cpf" placeholder="xxx.xxx.xxx-xx" required>
+            <br>
+          </div>
+          <div class="col-md-2">
+            <label for="data" class="lead">Data Nascimento:</label>
+            <input type="date" class="form-control" name="data">
+          </div>
+            <br>
+          <div class="col-md-2">
+            <label for="sexo" class="lead">Sexo:</label><br>
+            <input type="radio" name="sexo" value="homem">
+            <label for="homem" class="lead">Homem</label><br>
+            <input type="radio" name="sexo" value="mulher">
+            <label for="homem" class="lead">Mulher</label><br>
+            <input type="radio" name="sexo" value="outros">
+            <label for="homem" class="lead">outros</label>
+          </div>
+        </div>
+          <br>
+            <!--Contatos-->
+            <h3 class="display-6">Contato</h3>
+         <div class="row">  
+          <div class="col-md-2">
+            <label for="telefone"class="lead">Telefone 1</label>
+            <input type="tel" class="form-control" name="tel_1" placeholder="(xx)xxxxx-xxxx">
+          </div>
+            <br>
+          <div class="col-md-2">
+            <label for="telefone" class="lead">Telefone 2</label>
+            <input type="tel" class="form-control" name="tel_2" placeholder="(xx)xxxxx-xxxx">
+          </div>
+            <br>
+          <div class="col-md-4">
+            <label for="email" class="lead">Email:</label>
+            <input type="email" class="form-control" name="email" placeholder="nome@exemplo.com">
+          </div>
+        </div> 
+        <br>
+            <!--Endereço-->
+            <h3 class="display-6">Endereço</h3>
+        <div class="row">
+          <div class="col-md-2">
+            <label for="cep" class="lead">CEP</label>
+            <input type="text" class="form-control" id="cep" name="cep">
+          </div>
+          <br>
+          <div class="col-md-1">
+            <label for="uf" class="lead">UF:</label>
+            <input type="text" class="form-control" id="uf" name="uf">
+          </div>
+          <br>
+          <div class="col-md-3">
+            <label for="cidade" class="lead">Cidade:</label>
+            <input type="text" class="form-control" id="cidade" name="cidade">
+          </div>
+          <br>
+          <div class="col-md-6">
+            <label for="logradouro" class="lead">Endereço:</label>
+            <input type="text" class="form-control" id="logradouro" name="logradouro">
+          </div>
+          <br>
+          <div class="col-md-3">
+            <label for="bairro" class="lead">Bairro:</label>
+            <input type="text" class="form-control" id="bairro" name="bairro">
+          </div>
+          <br>
+          <div class="col-md-1">
+            <label for="numero" class="lead">Numero:</label>
+            <input type="text" class="form-control" id="numero" name="numero">
+          </div> 
+          <div class="col-md-8">
+            <label for="complemento" class="lead">Complemento:</label>
+            <input type="text" class="form-control" id="complemento" name="complemento">
+          </div>
+        </div>
+      
+          <br><br>
+          <!--Botão de submit-->
+          <button type="submit" class="btn btn-outline-success col-md-12">Realizar Cadastro</button>
+        </form>
+      </div>
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+      <p class="mb-1">&copy; 2023 Sabrina de Sousa</p>
+    </footer>
+  </main>
 </body>
 </html>
